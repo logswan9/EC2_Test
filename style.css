@@ -1,0 +1,27 @@
+body {
+  font-family: sans-serif;
+  /* background-color: rgb(42, 46, 52); */
+}
+
+@keyframes slideOutFromUnder {
+  from {
+        transform: translateY(-100%);
+    }
+
+    to {
+        transform: translateY(0%);
+    }
+}
+
+@keyframes slideInFromOut {
+    0% {
+        transform: translateY(0%);
+    }
+
+    100% {
+        transform: translateY(-100%);
+       
+    }
+  
+}
+
