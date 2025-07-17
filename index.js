@@ -52,7 +52,7 @@ app.get('/contact.html', function(req, res){
 });
 
 
-var mysql      = require('mysql');
+var mysql      = require('mysql2');
 var connection = mysql.createConnection({
   host     : process.env.HOST,
   user     : process.env.USER,
