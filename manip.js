@@ -57,7 +57,7 @@ try {
             return response.json; // or response.text(), depending on your server response
         })
         .then(data => {
-            console.log('Received:', data);
+            console.log('Received:', data.toString());
             //console.log(response);
         })
         .catch(error => {
