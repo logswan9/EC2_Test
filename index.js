@@ -77,13 +77,14 @@ app.get('/qTest', function(req, res){
                 return;
             } 
             console.log(result);
-            retResult = result;
+            res.json(result);
+            //retResult = result;
         })
 
     });
 
 
-    res.json(retResult);
+    
 });
 
 
