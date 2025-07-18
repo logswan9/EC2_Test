@@ -1,3 +1,5 @@
+//const IP = process.env.HOST
+//console.log(IP);
 
 
 document.getElementById('entLink').addEventListener('click', () => {
@@ -47,15 +49,16 @@ try {
 
         // });
 
-        fetch('http://localhost:8000/qTest')
+        fetch('/qTest')
         .then(response => {
             if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            return response.json(); // or response.text(), depending on your server response
+            return response; // or response.text(), depending on your server response
         })
         .then(data => {
             console.log('Received:', data);
+            //console.log(response);
         })
         .catch(error => {
             console.error('Fetch error:', error);
