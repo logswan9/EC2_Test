@@ -52,11 +52,7 @@ app.get('/contact.html', function(req, res){
 });
 
 
-console.log(`Host: ${process.env.HOST} User: ${process.env.USER} pw: ${process.env.PW}`);
-
-
-
-var mysql      = require('mysql2');
+var mysql = require('mysql2');
 var connection = mysql.createConnection({
   host     : process.env.DB_HOST,
   user     : process.env.DB_USER,
@@ -76,9 +72,8 @@ connection.connect(function(err) {
         return;
     } 
     console.log(result);
-    
-    
   })
+
 });
 
 

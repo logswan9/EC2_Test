@@ -1,3 +1,5 @@
+require('dotenv').config()
+var mysql = require('mysql2');
 console.log("Test");
 
 
@@ -17,6 +19,38 @@ try {
     document.getElementById('bookNow').addEventListener('click', () => {
     window.location.href = 'lodgeHotels.html';
 })
+} catch (error) {
+   console.log(error);
+    
+}
+
+try {
+    document.getElementById('db_button').addEventListener('click', () => {
+        var connection = mysql.createConnection({
+          host     : process.env.DB_HOST,
+          user     : process.env.DB_USER,
+          password : process.env.DB_PW
+        });
+
+        connection.connect(function(err) {
+            if (err) {
+                console.error('error connecting: ' + err.stack);
+                return;
+            }
+
+            console.log('connected as id ' + connection.threadId);
+            connection.query("SELECT * FROM testcf.testTable", (err, result, fields) => {
+                if (err) {
+                    console.log(err.stack);
+                    return;
+                } 
+                console.log(result);
+                document.getElementById("result_field").innerHTML = result;
+            })
+
+        });
+    
+    })
 } catch (error) {
    console.log(error);
     
