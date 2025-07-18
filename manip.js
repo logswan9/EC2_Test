@@ -1,6 +1,3 @@
-//const IP = process.env.HOST
-//console.log(IP);
-
 
 document.getElementById('entLink').addEventListener('click', () => {
     window.location.href = 'entertainment.html';
@@ -25,30 +22,6 @@ try {
 
 try {
     document.getElementById('db_button').addEventListener('click', () => {
-        // var connection = mysql.createConnection({
-        //   host     : process.env.DB_HOST,
-        //   user     : process.env.DB_USER,
-        //   password : process.env.DB_PW
-        // });
-
-        // connection.connect(function(err) {
-        //     if (err) {
-        //         console.error('error connecting: ' + err.stack);
-        //         return;
-        //     }
-
-        //     console.log('connected as id ' + connection.threadId);
-        //     connection.query("SELECT * FROM testcf.testTable", (err, result, fields) => {
-        //         if (err) {
-        //             console.log(err.stack);
-        //             return;
-        //         } 
-        //         console.log(result);
-        //         document.getElementById("result_field").innerHTML = result;
-        //     })
-
-        // });
-
         fetch('/qTest')
         .then(response => {
             if (!response.ok) {
@@ -57,9 +30,15 @@ try {
             return response.json(); // or response.text(), depending on your server response
         })
         .then(data => {
+            var frontResult = "";
             console.log('Received:', data);
+            for (let i = 0; i < data.length; i++) {
+                frontResult += `${i}. firstname: ${data[i].firstname} lastname: ${data[i].lastname} phone: ${data[i].phone}<br>`
+                //console.log(`${i}. firstname: ${data[i].firstname} lastname: ${data[i].lastname} phone: ${data[i].phone}`);
+                
+            }
             console.log(JSON.stringify(data, null, 2));
-            //document.getElementById("result_field").innerHTML = data;
+            document.getElementById("result_field").innerHTML = frontResult;
             //console.log(response);
         })
         .catch(error => {
