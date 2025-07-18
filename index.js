@@ -58,9 +58,9 @@ console.log(`Host: ${process.env.HOST} User: ${process.env.USER} pw: ${process.e
 
 var mysql      = require('mysql2');
 var connection = mysql.createConnection({
-  host     : process.env.HOST,
-  user     : process.env.USER,
-  password : process.env.PW
+  host     : process.env.DB_HOST,
+  user     : process.env.DB_USER,
+  password : process.env.DB_PW
 });
 
 connection.connect(function(err) {
