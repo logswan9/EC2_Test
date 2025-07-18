@@ -70,6 +70,15 @@ connection.connect(function(err) {
   }
 
   console.log('connected as id ' + connection.threadId);
+  connection.query("SELECT * FROM testcf.testTable", (err, result, fields) => {
+    if (err) {
+        console.log(err.stack);
+        return;
+    } 
+    console.log(result);
+    
+    
+  })
 });
 
 
