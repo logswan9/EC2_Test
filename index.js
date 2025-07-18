@@ -2,6 +2,9 @@ const express = require('express')
 require('dotenv').config()
 const app = express()
 const PORT = 8000
+const cors = require('cors');
+
+app.use(cors());
 
 app.get('/', function(req, res){
     res.sendFile(__dirname + '/index.html');
