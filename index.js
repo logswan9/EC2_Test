@@ -3,6 +3,7 @@ require('dotenv').config()
 const app = express()
 const PORT = 8000
 const cors = require('cors');
+var mysql = require('mysql2');
 
 app.use(cors());
 
@@ -55,33 +56,38 @@ app.get('/contact.html', function(req, res){
 });
 
 app.get('/qTest', function(req, res){
-    res.send("response!");
+    var retResult;
+
+    var connection = mysql.createConnection({
+        host     : process.env.DB_HOST,
+        user     : process.env.DB_USER,
+        password : process.env.DB_PW
+    });
+
+    connection.connect(function(err) {
+        if (err) {
+            console.error('error connecting: ' + err.stack);
+            return;
+        }
+
+        console.log('connected as id ' + connection.threadId);
+        connection.query("SELECT * FROM testcf.testTable", (err, result, fields) => {
+            if (err) {
+                console.log(err.stack);
+                return;
+            } 
+            console.log(result);
+            retResult = result;
+        })
+
+    });
+
+
+    res.send(retResult);
 });
 
 
-var mysql = require('mysql2');
-var connection = mysql.createConnection({
-  host     : process.env.DB_HOST,
-  user     : process.env.DB_USER,
-  password : process.env.DB_PW
-});
 
-connection.connect(function(err) {
-  if (err) {
-    console.error('error connecting: ' + err.stack);
-    return;
-  }
-
-  console.log('connected as id ' + connection.threadId);
-  connection.query("SELECT * FROM testcf.testTable", (err, result, fields) => {
-    if (err) {
-        console.log(err.stack);
-        return;
-    } 
-    console.log(result);
-  })
-
-});
 
 
 app.listen(PORT, ()=>{
