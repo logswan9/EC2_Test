@@ -58,6 +58,8 @@ try {
         })
         .then(data => {
             console.log('Received:', data);
+            console.log(JSON.stringify(data, null, 2));
+            //document.getElementById("result_field").innerHTML = data;
             //console.log(response);
         })
         .catch(error => {
