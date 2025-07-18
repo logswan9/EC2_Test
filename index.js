@@ -83,7 +83,7 @@ app.get('/qTest', function(req, res){
     });
 
 
-    res.send(retResult);
+    res.json(retResult);
 });
 
 
