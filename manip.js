@@ -1,6 +1,3 @@
-require('dotenv').config()
-var mysql = require('mysql2');
-console.log("Test");
 
 
 document.getElementById('entLink').addEventListener('click', () => {
@@ -26,28 +23,42 @@ try {
 
 try {
     document.getElementById('db_button').addEventListener('click', () => {
-        var connection = mysql.createConnection({
-          host     : process.env.DB_HOST,
-          user     : process.env.DB_USER,
-          password : process.env.DB_PW
-        });
+        // var connection = mysql.createConnection({
+        //   host     : process.env.DB_HOST,
+        //   user     : process.env.DB_USER,
+        //   password : process.env.DB_PW
+        // });
 
-        connection.connect(function(err) {
-            if (err) {
-                console.error('error connecting: ' + err.stack);
-                return;
+        // connection.connect(function(err) {
+        //     if (err) {
+        //         console.error('error connecting: ' + err.stack);
+        //         return;
+        //     }
+
+        //     console.log('connected as id ' + connection.threadId);
+        //     connection.query("SELECT * FROM testcf.testTable", (err, result, fields) => {
+        //         if (err) {
+        //             console.log(err.stack);
+        //             return;
+        //         } 
+        //         console.log(result);
+        //         document.getElementById("result_field").innerHTML = result;
+        //     })
+
+        // });
+
+        fetch('http://localhost:8000/qTest')
+        .then(response => {
+            if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
             }
-
-            console.log('connected as id ' + connection.threadId);
-            connection.query("SELECT * FROM testcf.testTable", (err, result, fields) => {
-                if (err) {
-                    console.log(err.stack);
-                    return;
-                } 
-                console.log(result);
-                document.getElementById("result_field").innerHTML = result;
-            })
-
+            return response.json(); // or response.text(), depending on your server response
+        })
+        .then(data => {
+            console.log('Received:', data);
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
         });
     
     })

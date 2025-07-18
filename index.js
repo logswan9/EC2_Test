@@ -51,6 +51,10 @@ app.get('/contact.html', function(req, res){
     res.sendFile(__dirname + '/contact.html');
 });
 
+app.get('/qTest', function(req, res){
+    res.send("response!");
+});
+
 
 var mysql = require('mysql2');
 var connection = mysql.createConnection({
