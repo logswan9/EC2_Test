@@ -54,10 +54,10 @@ try {
             if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            return response.json; // or response.text(), depending on your server response
+            return response.json.toString(); // or response.text(), depending on your server response
         })
         .then(data => {
-            console.log('Received:', data.toString());
+            console.log('Received:', data);
             //console.log(response);
         })
         .catch(error => {
